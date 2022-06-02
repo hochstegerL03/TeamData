@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 import ProjectView from '../views/ProjectView.vue';
 
 const router = createRouter({
@@ -7,17 +7,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'projects',
-      component: ProjectView
+      component: ProjectView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
-})
+      path: '/add',
+      name: 'add',
+      component: () => import('../views/ProjektAddView.vue'),
+    },
+  ],
+});
 
-export default router
+export default router;
