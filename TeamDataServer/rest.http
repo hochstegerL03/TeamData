@@ -1,0 +1,122 @@
+GET http://localhost:3000/employees
+################################################################
+GET http://localhost:3000/employees/details
+################################################################
+GET http://localhost:3000/employees/details/3
+################################################################
+GET http://localhost:3000/employees/3
+################################################################
+DELETE http://localhost:3000/employees/19
+################################################################
+POST http://localhost:3000/employees
+Content-Type: application/json
+
+{
+    "firstname": "Lennart",
+    "lastname": "Weingraber",
+    "birthday": "1999-08-03",
+    "joined": "2020-07-07",
+    "admin_id": 2
+  }
+################################################################
+PATCH http://localhost:3000/employees/20
+Content-Type: application/json
+
+{
+    "firstname": "Lennart",
+    "lastname": "Weingraber",
+    "birthday": "1999-08-03",
+    "joined": "2020-07-07",
+    "admin_id": 2
+}
+################################################################
+GET http://localhost:3000/admins
+################################################################
+GET http://localhost:3000/admins/1
+################################################################
+DELETE http://localhost:3000/admins/9
+################################################################
+POST http://localhost:3000/admins
+Content-Type: application/json
+
+{
+    "firstname": "Lennart",
+    "lastname": "Weingraber",
+    "birthday": "1999-08-03",
+    "joined": "2020-07-07"
+  }
+################################################################
+PATCH http://localhost:3000/admins/18
+Content-Type: application/json
+
+{
+    "firstname": "Lenno",
+    "lastname": "Weingraber",
+    "birthday": "1999-08-03",
+    "joined": "2020-07-07"
+}
+################################################################
+GET http://localhost:3000/customers
+################################################################
+GET http://localhost:3000/customers/5
+################################################################
+DELETE http://localhost:3000/customers/5
+################################################################
+POST http://localhost:3000/customers
+Content-Type: application/json
+
+{
+    "firstname": "Lennart",
+    "lastname": "Weingraber",
+    "birthday": "1999-08-03",
+    "joined": "2020-07-07",
+    "company": "idk GmbH",
+    "budget": 100
+  }
+################################################################
+PATCH http://localhost:3000/customers/17
+Content-Type: application/json
+
+{
+    "firstname": "Lennokraft007",
+    "lastname": "Weingraber008",
+    "birthday": "1999-08-03",
+    "joined": "2020-07-07",
+    "company": "idk GmbH 007",
+    "budget": 100
+}
+################################################################
+GET http://localhost:3000/projects
+################################################################
+GET http://localhost:3000/projects/details
+################################################################
+GET http://localhost:3000/projects/details/2
+################################################################
+GET http://localhost:3000/projects/6
+################################################################
+DELETE http://localhost:3000/projects/4
+################################################################
+POST http://localhost:3000/projects
+Content-Type: application/json
+
+{
+    "name": "YOUR MILKY",
+    "description": "Yes",
+    "start": "1999-08-03",
+    "deadline": "2020-07-07",
+    "customer_id": 1,
+    "admin_id": 2
+  }
+################################################################
+PATCH http://localhost:3000/projects/18
+Content-Type: application/json
+
+{
+    "name": "Dodo",
+    "description": "Not fly!",
+    "start": "1209-08-03",
+    "deadline": "1720-07-07",
+    "customer_id": 1,
+    "admin_id": 2
+}
+################################################################

@@ -1,0 +1,29 @@
+{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "a simple web server",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "lint": "eslint . --ext .js"
+  },
+  "author": "RB",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "express": "^4.17.1",
+    "helmet": "^5.0.1",
+    "is-my-json-valid": "^2.20.6",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
+    "express-async-handler": "^1.2.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
