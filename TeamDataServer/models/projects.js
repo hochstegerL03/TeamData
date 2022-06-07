@@ -3,7 +3,7 @@ import { query, pool } from '../db/index.js';
 
 const dbGetProjects = async () => {
   const { rows } = await query(
-    "SELECT name, description, to_char(start, 'YYYY-MM-DD') as start, to_char(deadline, 'YYYY-MM-DD') as deadline, customer_id, admin_id, project_id FROM projects",
+    "SELECT name, description, to_char(start, 'YYYY-MM-DD') as start, to_char(deadline, 'YYYY-MM-DD') as deadline, customer_id, admin_id, project_id, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM customers c WHERE c.customer_id = projects.customer_id) as customer, (SELECT CONCAT(a.firstname, ' ', a.lastname) FROM admins a WHERE a.admin_id = projects.admin_id) as admin FROM projects;",
   );
   return rows;
 };

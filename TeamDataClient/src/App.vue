@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router';
   <div class="container text-center">
     <nav class="my-4">
       <RouterLink to="/" class="nav-link">Projects </RouterLink>
-      <RouterLink to="/about" class="nav-link"> Add Project </RouterLink>
+      <RouterLink to="/add" class="nav-link"> Add Project </RouterLink>
     </nav>
 
     <div class="d-flex justify-content-center"><RouterView /></div>
@@ -26,5 +26,4 @@ a.router-link-active {
   border-bottom: #0077b6 3px solid;
   color: black;
 }
-
 </style>

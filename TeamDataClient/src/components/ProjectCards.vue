@@ -31,15 +31,14 @@
                   <p>End: {{ project.deadline }}</p>
                 </div>
               </div>
-
               <div class="row" v-if="project.admin && project.customer">
                 <div class="col-md-6">
                   <p style="margin: 0">Leader:</p>
-                  <p>{{ `${project.admin.firstname} ${project.admin.lastname}` }}</p>
+                  <p>{{ project.admin }}</p>
                 </div>
                 <div class="col-md-6">
                   <p style="margin: 0">Buyer:</p>
-                  <p>{{ `${project.customer.firstname} ${project.customer.lastname}` }}</p>
+                  <p>{{ project.customer }}</p>
                 </div>
               </div>
             </div>
@@ -138,20 +137,10 @@
                 id="prjCustomer"
                 v-if="targetCustomers[targetCustomers.length - 1]"
                 required
+                v-model="targetProject.customer_id"
               >
-                <option :value="targetProject.customer_id" active>
-                  {{
-                    ` ${targetCustomers[targetCustomers.length - 1].firstname} ${
-                      targetCustomers[targetCustomers.length - 1].lastname
-                    }`
-                  }}
-                </option>
-                <option
-                  v-for="customer in targetCustomers.slice(0, targetCustomers.length - 1)"
-                  :key="customer.customer_id"
-                  :value="customer.customer_id"
-                >
-                  {{ `${customer.firstname} ${customer.lastname}` }}
+                <option v-for="customer in targetCustomers" :key="customer.customer_id" :value="customer.customer_id">
+                  {{ customer.firstname }} {{ customer.lastname }}
                 </option>
               </select>
               <p for="prjAdmin">Admin:</p>
@@ -160,20 +149,10 @@
                 id="prjAdmin"
                 v-if="targetAdmins[targetAdmins.length - 1]"
                 required
+                v-model="targetProject.admin_id"
               >
-                <option :value="targetProject.admin_id" active>
-                  {{
-                    ` ${targetAdmins[targetAdmins.length - 1].firstname} ${
-                      targetAdmins[targetAdmins.length - 1].lastname
-                    }`
-                  }}
-                </option>
-                <option
-                  v-for="admin in targetAdmins.slice(0, targetAdmins.length - 1)"
-                  :key="admin.admin_id"
-                  :value="admin.admin_id"
-                >
-                  {{ `${admin.firstname} ${admin.lastname}` }}
+                <option v-for="admin in targetAdmins" :key="admin.admin_id" :value="admin.admin_id">
+                  {{ admin.firstname }} {{ admin.lastname }}
                 </option>
               </select>
               <button type="submit" class="btn btn-primary">Save</button>
@@ -247,13 +226,14 @@ onMounted(async () => {
 
 const getMain = async () => {
   await projectStore.getProjects();
+  // await getAllFurtherData(projectStore.projects);
+  console.log(projectStore.projects);
   projects.value = projectStore.projects;
-  await getAllFurtherData(projects.value);
 };
 
 const deleteProject = async (id) => {
   await axios.delete(`http://localhost:3000/projects/${id}`);
-  projectStore.getProjects();
+  await getMain();
 };
 
 const editTarget = async (id) => {
@@ -276,23 +256,29 @@ const getTargetCustomer = async (id) => {
   const { data } = await axios.get(`http://localhost:3000/customers/${id}`);
   return data;
 };
-const getAllFurtherData = async (projects) => {
-  let promises = [];
-  for (let project of projects) {
-    promises.push(await showCustomer(project.customer_id));
-    promises.push(await showAdmin(project.admin_id));
-  }
-  await Promise.all([...promises]);
-};
-const showCustomer = async (id) => {
-  projects.value[projects.value.findIndex((elm) => elm.customer_id === id)].customer =
-    await getTargetCustomer(id);
-};
+// const getAllFurtherData = async (projects) => {
+//   let promises = [];
+//   for (let project of projects) {
+//     promises.push(showCustomer(project.customer_id));
+//     promises.push(showAdmin(project.admin_id));
+//   }
+//   await Promise.all(promises);
+//   // console.log(promises.length);
+// };
+// const showCustomer = async (id) => {
+//   projectStore.projects[projectStore.projects.findIndex((elm) => elm.customer_id === id)].customer =
+//     await getTargetCustomer(id);
+//   // console.log(
+//   //   projectStore.projects[projectStore.projects.findIndex((elm) => elm.customer_id === id)]
+//   //     .customer,
+//   // );
+// };
 
-const showAdmin = async (id) => {
-  projects.value[projects.value.findIndex((elm) => elm.admin_id === id)].admin =
-    await getTargetAdmin(id);
-};
+// const showAdmin = async (id) => {
+//   projectStore.projects[projectStore.projects.findIndex((elm) => elm.admin_id === id)].admin =
+//     await getTargetAdmin(id);
+//   // console.log(projects.value[projects.value.findIndex((elm) => elm.admin_id === id)].admin);
+// };
 
 const getTargetAdmins = async (id) => {
   let { data } = await axios.get('http://localhost:3000/admins');
